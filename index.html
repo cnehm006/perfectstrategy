@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack Strategy Practice</title>
+    <div id="scoreDisplay">Score: 0/0 (0%)</div>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,8 +19,10 @@
             <div id="playerCards"></div>
         </div>
         <button id="dealButton">Deal</button>
-        <button id="hitButton">Hit</button>
-        <button id="standButton">Stand</button>
+        <button id="hitButton" disabled>Hit</button>
+        <button id="standButton" disabled>Stand</button>
+        <button id="doubleButton" disabled>Double</button>
+        <button id="splitButton" disabled>Split</button>        
     </div>
     <script src="script.js"></script>
 </body>
