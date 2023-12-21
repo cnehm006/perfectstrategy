@@ -1,44 +1,71 @@
-let playerHand = [];
-let dealerHand = [];
-const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
-const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+let deck;
 
-function createDeck() {
-    let deck = [];
-    for (let suit of suits) {
-        for (let value of values) {
-            deck.push(value + ' of ' + suit);
+function calculateHandValue(hand) {
+    let value = 0;
+    let aceCount = 0;
+    for (let card of hand) {
+        let cardValue = card.split(' ')[0];
+        if (['J', 'Q', 'K'].includes(cardValue)) {
+            value += 10;
+        } else if (cardValue === 'A') {
+            aceCount++;
+            value += 11;
+        } else {
+            value += parseInt(cardValue);
         }
     }
-    return deck;
-}
-
-function shuffleDeck(deck) {
-    for (let i = deck.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [deck[i], deck[j]] = [deck[j], deck[i]];
+    while (value > 21 && aceCount > 0) {
+        value -= 10;
+        aceCount--;
     }
-    return deck;
+    return value;
 }
 
 function deal() {
-    let deck = shuffleDeck(createDeck());
+    deck = shuffleDeck(createDeck());
     playerHand = [deck.pop(), deck.pop()];
     dealerHand = [deck.pop(), deck.pop()];
     displayCards();
-}
-
-function displayCards() {
-    document.getElementById('playerCards').innerText = 'Your cards: ' + playerHand.join(', ');
-    document.getElementById('dealerCards').innerText = 'Dealer cards: ' + dealerHand.join(', ');
+    checkForEndOfGame();
 }
 
 function hit() {
-    // Add functionality for player hit (deal another card to player)
+    if (calculateHandValue(playerHand) < 21) {
+        playerHand.push(deck.pop());
+        displayCards();
+        checkForEndOfGame();
+    }
 }
 
 function stand() {
-    // Add functionality for player stand (end player's turn)
+    // Dealer's turn to hit until reaching 17 or higher
+    while (calculateHandValue(dealerHand) < 17) {
+        dealerHand.push(deck.pop());
+    }
+    displayCards();
+    checkForEndOfGame();
+}
+
+function checkForEndOfGame() {
+    let playerValue = calculateHandValue(playerHand);
+    let dealerValue = calculateHandValue(dealerHand);
+    let gameOver = false;
+    
+    if (playerValue > 21) {
+        gameOver = true;
+        alert('You busted!');
+    } else if (dealerValue > 21) {
+        gameOver = true;
+        alert('Dealer busted. You win!');
+    } else if (playerHand.length === 5 && playerValue <= 21) {
+        gameOver = true;
+        alert('Five card trick! You win!');
+    }
+
+    if (gameOver) {
+        document.getElementById('hitButton').disabled = true;
+        document.getElementById('standButton').disabled = true;
+    }
 }
 
 document.getElementById('dealButton').addEventListener('click', deal);
