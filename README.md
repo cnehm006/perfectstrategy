@@ -1,2 +1,4 @@
 # Blackjack Perfect Strategy Trainer
-just a little thing i wanna try to do. :)
+The Blackjack Basic Strategy Trainer is a cutting-edge, user-centric tool designed to revolutionize the way individuals learn and practice Blackjack. Aimed at both beginners and seasoned players, this interactive application offers a comprehensive learning experience. With its intuitive interface and detailed analytics, the trainer is an indispensable tool for anyone looking to master the intricacies of the Blackjack basic strategy.
+
+Developed mostly using Javascript, the project showcases a blend of robust backend algorithms and a (soon-to-be) sleek, user-friendly front end. Users can easily dive into the learning experience, benefiting from a platform that is both informative and engaging. The project is open for contributions, encouraging community involvement in bug reporting, code contributions, and feature enhancements. Adhering to a transparent and inclusive development process, the Blackjack Basic Strategy Trainer not only serves as a learning tool but also as a testament to collaborative, open-source software development.
